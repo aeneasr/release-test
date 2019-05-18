@@ -18,13 +18,6 @@ jobs:
             ./.circleci/release_name.bash
             source $BASH_ENV
       - setup_remote_docker
-      - run: sudo apt-get install jq
-      - run: curl "https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases"
-      - run: curl "https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases" | jq -r ".[0].tag_name"
-      - run: curl "https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases" | jq -r ".[0].name"
-      - run: echo $BASH_ENV
-      - run: cat $BASH_ENV
-      - run: echo $RELEASE_NAME
       - run: docker login --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
       - run: cp ./.releaser/LICENSE.txt ./LICENSE.txt
       - run: curl -sL https://git.io/goreleaser | bash
