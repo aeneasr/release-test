@@ -13,7 +13,7 @@ builds:
       - -a
     ldflags:
       - -s -w -X github.com/aeneasr/release-test/cmd.Version={{.Tag}} -X github.com/aeneasr/release-test/cmd.Commit={{.FullCommit}} -X github.com/aeneasr/release-test/cmd.Date={{.Date}}
-    binary: test-release
+    binary: release-test
     env:
       - CGO_ENABLED=0
     goarch:
@@ -49,7 +49,7 @@ changelog:
 brew:
   github:
     owner: aeneasr
-    name: homebrew-test-release
+    name: homebrew-release-test
   homepage:  https://www.ory.sh
   commit_author:
     name: aeneasr
@@ -58,7 +58,7 @@ brew:
 scoop:
   bucket:
     owner: aeneasr
-    name: scoop-test-release
+    name: scoop-release-test
   homepage:  https://www.ory.sh
   commit_author:
     name: aeneasr
@@ -66,10 +66,10 @@ scoop:
 
 dockers:
   - image_templates:
-      - "oryd/test-release:v{{ .Major }}"
-      - "oryd/test-release:v{{ .Major }}.{{ .Minor }}"
-      - "oryd/test-release:v{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
-      - "oryd/test-release:{{ .Env.DOCKER_SHORT_TAG }}"
-      - "oryd/test-release:latest"
+      - "oryd/release-test:v{{ .Major }}"
+      - "oryd/release-test:v{{ .Major }}.{{ .Minor }}"
+      - "oryd/release-test:v{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
+      - "oryd/release-test:{{ .Env.DOCKER_SHORT_TAG }}"
+      - "oryd/release-test:latest"
     extra_files:
       - .releaser/LICENSE.txt

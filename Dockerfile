@@ -8,8 +8,8 @@ RUN apk add -U --no-cache ca-certificates
 FROM scratch
 
 COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY hydra /usr/bin/hydra
+COPY test-release /usr/bin/test-release
 COPY .releaser/LICENSE.txt /LICENSE.txt
 
-ENTRYPOINT ["hydra"]
-CMD ["serve", "all"]
+ENTRYPOINT ["test-release"]
+CMD ["version"]
