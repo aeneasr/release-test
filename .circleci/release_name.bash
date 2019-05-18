@@ -5,8 +5,7 @@ tag=$(jq -r ".[0].tag_name")
 tag_name=$(jq -r ".[0].name")
 
 if [[ -n "$tag_name" ]]; then
-    echo "export RELEASE_NAME=$tag_name"
-    exit 0
+    echo "export RELEASE_NAME=$tag_name" >> $BASH_ENV
+else
+    echo "export RELEASE_NAME=$tag" >> $BASH_ENV
 fi
-
-echo "export RELEASE_NAME=$tag"
