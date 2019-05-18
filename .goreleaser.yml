@@ -66,10 +66,10 @@ scoop:
 
 dockers:
   - image_templates:
-      - "oryd/release-test:v{{ .Major }}"
-      - "oryd/release-test:v{{ .Major }}.{{ .Minor }}"
-      - "oryd/release-test:v{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
-      - "oryd/release-test:{{ .Env.DOCKER_SHORT_TAG }}"
-      - "oryd/release-test:latest"
+      - "arekkas/release-test:v{{ .Major }}"
+      - "arekkas/release-test:v{{ .Major }}.{{ .Minor }}"
+      - "arekkas/release-test:v{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
+      - "arekkas/release-test:{{ .Env.DOCKER_SHORT_TAG }}"
+      - "arekkas/release-test:latest"
     extra_files:
       - .releaser/LICENSE.txt
