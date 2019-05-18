@@ -8,8 +8,8 @@ RUN apk add -U --no-cache ca-certificates
 FROM scratch
 
 COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY test-release /usr/bin/test-release
+COPY release-test /usr/bin/release-test
 COPY .releaser/LICENSE.txt /LICENSE.txt
 
-ENTRYPOINT ["test-release"]
+ENTRYPOINT ["release-test"]
 CMD ["version"]
