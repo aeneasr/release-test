@@ -19,6 +19,10 @@ jobs:
             source $BASH_ENV
       - setup_remote_docker
       - run: sudo apt-get install jq
+      - run: https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases
+      - run: https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases | jq -r ".[0].tag_name"
+      - run: https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases | jq -r ".[0].tag"
+      - run: echo $BASH_ENV
       - run: echo $RELEASE_NAME
       - run: docker login --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
       - run: cp ./.releaser/LICENSE.txt ./LICENSE.txt
