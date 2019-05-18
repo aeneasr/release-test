@@ -30,7 +30,7 @@ builds:
       - linux
       - windows
       - darwin
-archive:
+archives:
   -
     replacements:
       darwin: macOS
