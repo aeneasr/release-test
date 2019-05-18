@@ -1,0 +1,75 @@
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+project_name: release-test
+
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod download
+builds:
+  -
+    flags:
+      - -a
+    ldflags:
+      - -s -w -X github.com/aeneasr/release-test/cmd.Version={{.Tag}} -X github.com/aeneasr/release-test/cmd.Commit={{.FullCommit}} -X github.com/aeneasr/release-test/cmd.Date={{.Date}}
+    binary: test-release
+    env:
+      - CGO_ENABLED=0
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - 5
+      - 6
+      - 7
+    goos:
+      - freebsd
+      - linux
+      - windows
+      - darwin
+archive:
+  replacements:
+    darwin: macOS
+    linux: Linux
+    windows: Windows
+    386: 32-bit
+    amd64: 64-bit
+  format_overrides:
+    - goos: windows
+      format: zip
+  files:
+    -  LICENSE.txt
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+brew:
+  github:
+    owner: aeneasr
+    name: homebrew-test-release
+  homepage:  https://www.ory.sh
+  commit_author:
+    name: aeneasr
+    email: hi@ory.sh
+
+scoop:
+  bucket:
+    owner: aeneasr
+    name: scoop-test-release
+  homepage:  https://www.ory.sh
+  commit_author:
+    name: aeneasr
+    email: hi@ory.sh
+
+dockers:
+  - image_templates:
+      - "oryd/test-release:v{{ .Major }}"
+      - "oryd/test-release:v{{ .Major }}.{{ .Minor }}"
+      - "oryd/test-release:v{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
+      - "oryd/test-release:{{ .Env.DOCKER_SHORT_TAG }}"
+      - "oryd/test-release:latest"
+    extra_files:
+      - .releaser/LICENSE.txt
